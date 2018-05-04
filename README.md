@@ -1,12 +1,12 @@
 # NgCssLoadProblem
 
-This project represents a much simplified issue which I encountered on a separate project I have been working on.
+This project represents a much simplified example of an issue which I encountered on a separate project I have been working on.
 
-In that project there are a number of files, both scss and css, but also some woff2 font files which are imported into one or master scss files using the `@import` statement.
+In that project there is a folder containing a number of style files, both scss and css, but also woff2 files (for ng material fonts), which are copied over from a central location in the larger company repo. There are a couple of "top level" scss files in this folder, which `@import` the other scss and (either directly or indirectly) import css and woff2 files too.
 
-NG-CLI fails to load the css files when attempting to build as it is unable to find the file, even though it is in the same location as the scss file which is requesting it.
+When I add an `@import` to the inbuilt styles.scss file to reference the scss "master" file from my copied-over folder, and run `ng build` I get an error to the effect that the css file couldn't be found, despite the fact that it is in the same folder as the scss file containing the `@import` statement.
 
-Another Angular project in the estate which uses a custom webpack config file does not encounter this problem.
+Another Angular project in the larger repo which uses a custom webpack config file does not encounter this problem when using these shared files.
 
 This problem doesn't occur when other scss files are `@import`ed. 
 
