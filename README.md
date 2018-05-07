@@ -14,6 +14,8 @@ My expectation as a "user" is that if a file is referenced by another one in the
 
 I suspect what is happening is that the system picks up and inlines the scss code, and then searches for any non-scss imports, by which time the current working location context of the original `@import` statement is lost. I believe this is a bug and hae created this repository to recreate the issue.
 
-The project is simply a vanilla `ng new` project, with a handful of scss and css files added to te `assets` folder. The default `styles.scss` file `@import`s the `external-styles.scss` file, which in turn `@import`s both the `external-styles.css` and `another-file.scss` file, in that order.
+The project is simply a vanilla `ng new` project, with a handful of scss and css files added to te `assets` folder. The default `styles.scss` file `@import`s the `external-sass-file.scss` file, which in turn `@import`s both the `external-css-file.css` and `another-file.scss` file, in that order.
 
-When running ng build or ng serve we get an rror to the effect that `external-styles.css` could not be found. If we change the name of the file to be a scss file (we also need to slightly ament the file name to avoid a naming clash) and then reference that renamed file, the project builds and serves with no problems, and we can observe that the rules defined kick in (the background is red and divs have a green 1px border).
+When running ng build or ng serve we get an rror to the effect that `external-css-file.css` could not be found. If we change the extension of the file to be a scss file and then reference that renamed file, the project builds and serves with no problems, and we can observe that the rules defined kick in (the background is red and divs have a green 1px border).
+
+I have also created a separate branch whereby the `external-sass-file.scss` is referenced directly via `angular-cli.cli`, which works in my case (this is a workaround for the issue but doesn't solve it 100% in all cases).
